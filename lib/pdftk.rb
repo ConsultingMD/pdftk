@@ -30,7 +30,6 @@ class Pdftk
     err = Open3.popen3(command) do |stdin, stdout, stderr|
       stderr.read
     end
-    raise "PDF could not be generated!" if pdf and pdf.rstrip.length == 0
   rescue Exception => e
     raise "Failed to execute:\n#{command}\nError: #{e}"
   end
