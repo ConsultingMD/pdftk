@@ -34,6 +34,16 @@ class Pdftk
     raise "Failed to execute:\n#{command}\nError: #{e}"
   end
 
+  def multistamp(input_path, stamp_path)
+    command = "#{@exe_path} #{input_path} multistamp #{stamp_path} output #{input_path}.numbered; mv #{input_path}.numbered #{input_path}"
+
+    err = Open3.popen3(command) do |stdin, stdout, stderr|
+      stderr.read
+    end
+  rescue Exception => e
+    raise "Failed to execute:\n#{command}\nError: #{e}"
+  end
+
   private
 
     def find_binary_path
